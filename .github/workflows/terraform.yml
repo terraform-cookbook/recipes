@@ -1,0 +1,53 @@
+---
+name: "Code Quality: Terraform"
+
+on:
+  pull_request:
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+
+    strategy:
+      # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstrategyfail-fast
+      fail-fast: false
+      matrix:
+        # The Snyk IaC GitHub Action currently only supports single files (via the `file` attribute in `with`).
+        # To work around this, a GitHub Actions Strategy is used to provide the files that should be tested.
+        terraform_directories:
+          - deployment
+          - configuration
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+          terraform_version: 1.1.7
+
+      - name: Initialize Terraform for `deployment`
+        run: terraform init
+        env:
+          working-dir: "${{ matrix.terraform_directories }}"
+
+      - name: Initialize Terraform for `configuration`
+        run: terraform init
+        env:
+          working-dir: "${{ matrix.terraform_directories }}"
+
+      - name: Format Terraform configuration
+        run: terraform fmt -check -recursive
+        env:
+          working-dir: "${{ matrix.terraform_directories }}"
+
+      - name: Validate Terraform configuration
+        run: terraform validate
+        env:
+          working-dir: "${{ matrix.terraform_directories }}"
