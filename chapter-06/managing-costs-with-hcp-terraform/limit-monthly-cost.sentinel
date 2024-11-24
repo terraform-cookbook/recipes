@@ -1,0 +1,14 @@
+#######################################################################
+# title:    6.8 - Managing Costs with HCP Terraform
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-06/managing-costs-with-hcp-terraform
+#######################################################################
+
+# Sentinel policy for cost control (limit-monthly-cost.sentinel)
+import "tfrun"
+import "decimal"
+
+monthly_cost_limit = decimal.new(1000)
+
+main = rule {
+    decimal.less_than(tfrun.cost_estimate.delta_monthly_cost, monthly_cost_limit)
+}

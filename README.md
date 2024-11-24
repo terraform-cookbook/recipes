@@ -4,10 +4,21 @@
 
 ## Table of Contents
 
-- [Terraform Cookbook](#terraform-cookbook)
-  - [Table of Contents](#table-of-contents)
-  - [Author Information](#author-information)
-  - [License](#license)
+<!-- TOC -->
+* [Recipes](#recipes)
+  * [Table of Contents](#table-of-contents)
+  * [Overview](#overview)
+  * [Author Information](#author-information)
+  * [License](#license)
+<!-- TOC -->
+
+## Overview
+
+|              | Link            |
+|--------------|-----------------|
+| Ebook        | https://learning.oreilly.com/library/view/terraform-cookbook/9781098108458   |
+| Errata       | https://www.oreilly.com/catalog/errata.csp?isbn=0636920559214  |
+| Code Samples | https://github.com/terraform-cookbook/recipes |
 
 ## Author Information
 

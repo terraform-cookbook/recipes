@@ -1,0 +1,34 @@
+#######################################################################
+# title:    4.2 - Linting Terraform with GitHub Actions
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-04/linting-terraform-with-github-actions
+#######################################################################
+
+---
+
+name: "Code Quality: Super-Linter"
+
+on:
+  pull_request:
+
+jobs:
+  superlinter:
+    name: Super-Linter
+    runs-on: ubuntu-latest
+    steps:
+      # see https://github.com/actions/checkout/releases
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # see https://github.com/super-linter/super-linter/releases
+      - name: Lint Code
+        uses: super-linter/super-linter@v7
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: "main"
+          DISABLE_ERRORS: false
+          VALIDATE_TERRAFORM: true
+          VALIDATE_YAML: true
+          VALIDATE_JSON: true
+          VALIDATE_MD: true

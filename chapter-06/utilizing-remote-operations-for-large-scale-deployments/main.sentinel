@@ -1,0 +1,18 @@
+#######################################################################
+# title:    6.9 - Utilizing Remote Operations for Large-Scale Deployments
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-06/utilizing-remote-operations-for-large-scale-deployments
+#######################################################################
+
+import "tfplan"
+
+required_tags = ["Environment", "Project"]
+
+main = rule {
+  all tfplan.resources as _, instances {
+    all instances as _, r {
+      all required_tags as t {
+        r.applied.tags contains t
+      }
+    }
+  }
+}

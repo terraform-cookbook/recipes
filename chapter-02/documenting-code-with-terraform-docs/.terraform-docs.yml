@@ -1,0 +1,27 @@
+#######################################################################
+# title:    2.7 - Documenting Code with terraform-docs
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-02/documenting-code-with-terraform-docs
+#######################################################################
+
+formatter: markdown table
+
+sections:
+  show:
+    - inputs
+    - outputs
+    - providers
+    - requirements
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  escape: true
+  indent: 2
+  required: true
+  sensitive: true
+  type: true
+
+sort:
+  enabled: true
+  by: required
