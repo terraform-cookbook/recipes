@@ -1,0 +1,14 @@
+#######################################################################
+# title:    6.10 - Advanced State Management and Recovery
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-06/advanced-state-management-and-recovery
+#######################################################################
+
+import "tfstate"
+
+main = rule {
+  all tfstate.resources.aws_s3_bucket as _, buckets {
+    all buckets as _, bucket {
+      bucket.attr.acl is "private"
+    }
+  }
+}

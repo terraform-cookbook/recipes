@@ -1,0 +1,38 @@
+#######################################################################
+# title:    4.2 - Linting Terraform with GitHub Actions
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-04/linting-terraform-with-github-actions
+#######################################################################
+
+---
+
+name: "Terraform Validation"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    steps:
+      # see https://github.com/actions/checkout/releases
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # see https://github.com/hashicorp/setup-terraform/releases
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate

@@ -1,0 +1,18 @@
+#######################################################################
+# title:    6.7 - Enforcing Policy as Code
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-06/enforcing-policy-as-code
+#######################################################################
+
+# This policy ensures all EC2 instances are t2.micro
+import "tfplan"
+
+ec2_instance_type = rule {
+    all tfplan.resources.aws_instance as _, instances {
+        all instances as _, r {
+            r.applied.instance_type is "t2.micro"
+        }
+    }
+}
+main = rule {
+    ec2_instance_type
+}

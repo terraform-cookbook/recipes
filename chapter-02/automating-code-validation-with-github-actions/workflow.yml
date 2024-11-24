@@ -1,0 +1,40 @@
+#######################################################################
+# title:    2.8 - Automating Code Validation with GitHub Actions
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-02/automating-code-validation-with-github-actions
+#######################################################################
+
+---
+
+name: Terraform Validation
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      # see https://github.com/actions/checkout/releases
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # see https://github.com/hashicorp/setup-terraform/releases
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.0
+
+      # see https://github.com/terraform-linters/setup-tflint/releases
+      - name: Run tflint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.54.0
+
+      # see https://github.com/aquasecurity/tfsec-action/releases
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          tflint_version: v0.54.0
