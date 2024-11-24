@@ -5,7 +5,8 @@
 
 # EC2 instance in the default region (us-west-2)
 resource "aws_instance" "west_server" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
+  ami           = "ami-05d38da78ce859165"
   instance_type = "t2.micro"
 
   tags = {
@@ -15,8 +16,10 @@ resource "aws_instance" "west_server" {
 
 # EC2 instance in the US East region
 resource "aws_instance" "east_server" {
-  provider      = aws.east
-  ami           = "ami-0747bdcabd34c712a"
+  provider = aws.east
+
+  # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
+  ami           = "ami-036841078a4b68e14"
   instance_type = "t2.micro"
 
   tags = {

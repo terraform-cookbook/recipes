@@ -22,7 +22,8 @@ module "ec2_cluster" {
 
   name = "instance-${each.key}"
 
-  ami                    = "ami-ebd02392"
+  # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
+  ami                    = "ami-05d38da78ce859165"
   instance_type          = "t3.micro"
   key_name               = "user1"
   monitoring             = true
