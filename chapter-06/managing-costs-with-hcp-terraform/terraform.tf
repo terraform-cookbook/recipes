@@ -9,7 +9,7 @@ terraform {
     organization = "terraform-cookbook"
 
     workspaces {
-      name = "my-workspace"
+      name = "<your-workspace-name>"
     }
   }
 
