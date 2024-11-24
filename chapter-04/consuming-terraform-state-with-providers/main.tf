@@ -15,7 +15,8 @@ data "terraform_remote_state" "network" {
 
 # Example resource using data from the remote state
 resource "aws_instance" "app_server" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
+  ami           = "ami-05d38da78ce859165"
   instance_type = "t2.micro"
   subnet_id     = data.terraform_remote_state.network.outputs.subnet_id
 
