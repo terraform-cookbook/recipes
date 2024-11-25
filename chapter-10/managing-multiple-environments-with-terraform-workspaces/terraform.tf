@@ -1,11 +1,11 @@
 #######################################################################
-# title:    6.8 - Managing Costs with HCP Terraform
-# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-06/managing-costs-with-hcp-terraform
+# title:    10.1 - Managing Multiple Environments with Terraform Workspaces
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-10/managing-multiple-environments-with-terraform-workspaces
 #######################################################################
 
 terraform {
+  # see https://developer.hashicorp.com/terraform/language/terraform#terraform-cloud
   cloud {
-    hostname     = "app.terraform.io"
     organization = "terraform-cookbook"
 
     workspaces {
@@ -19,12 +19,6 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 5.70.0, < 6.0.0"
-    }
-
-    # see https://registry.terraform.io/providers/hashicorp/tfe/latest
-    tfe = {
-      source  = "hashicorp/tfe"
-      version = ">= 0.60.0, < 1.0.0"
     }
   }
 

@@ -4,8 +4,10 @@
 #######################################################################
 
 module "ec2_instance" {
-  source        = "./my_module"
-  ami           = "ami-abc123"
+  source = "./my_module"
+
+  # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
+  ami           = "ami-05d38da78ce859165"
   instance_type = "t2.micro"
   instance_name = "my-instance"
 }

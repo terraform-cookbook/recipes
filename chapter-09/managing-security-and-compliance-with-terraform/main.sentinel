@@ -1,0 +1,14 @@
+#######################################################################
+# title:    9.9 - Managing Security and Compliance with Terraform
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-09/managing-security-and-compliance-with-terraform
+#######################################################################
+
+policy "restrict-ec2-instance-type" {
+  enforcement_level = "soft-mandatory"
+
+  main = rule {
+    all aws_instance as instance {
+      instance.instance_type in ["t3.micro", "t3.small", "t3.medium"]
+    }
+  }
+}

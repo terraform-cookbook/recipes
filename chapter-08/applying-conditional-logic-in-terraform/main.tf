@@ -1,12 +1,16 @@
 #######################################################################
-# title:    1.13 - Using Terraform Variables
-# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-01/using-terraform-variables
+# title:    8.5 - Applying Conditional Logic in Terraform
+# original: https://github.com/terraform-cookbook/recipes/tree/main/chapter-08/applying-conditional-logic-in-terraform
 #######################################################################
 
-# deploy an EC2 Instance with a specific AMI
-# see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 resource "aws_instance" "example" {
+  count = var.create_instance ? 1 : 0
+
   # Ubuntu 24.04, see https://cloud-images.ubuntu.com/locator/ec2/
   ami           = "ami-05d38da78ce859165"
   instance_type = "t2.micro"
+
+  tags = {
+    Name = "example-instance"
+  }
 }
